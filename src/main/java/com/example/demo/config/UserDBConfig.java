@@ -14,6 +14,7 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -51,6 +52,13 @@ public class UserDBConfig {
                 .packages(User.class)
                 .persistenceUnit("userPU")
                 .build();
+    }
+    //@Primary
+    @Bean(name = "userSessionFactory")
+    public HibernateJpaSessionFactoryBean userSessionFactory(@Qualifier("userEntityManager") EntityManagerFactory entityManagerFactory) {
+        HibernateJpaSessionFactoryBean fact = new HibernateJpaSessionFactoryBean();
+        fact.setEntityManagerFactory(entityManagerFactory);
+        return fact;
     }
     //@Primary
     @Bean(name = "userTransactionManager")

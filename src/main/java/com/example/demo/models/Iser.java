@@ -4,11 +4,11 @@ import com.sun.istack.internal.NotNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "info")
+@Table(name = "infoiser")
 public class Iser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
